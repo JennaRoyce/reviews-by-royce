@@ -73,36 +73,13 @@ header::after {
   right: 8%;
 }
 
-.title-mark {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 18px;
-  border-radius: 999px;
-  background: rgba(255, 252, 247, 0.18);
-  backdrop-filter: blur(12px);
-  font-size: 0.82rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-weight: 500;
-}
-
 header h1 {
-  margin: 20px 0 8px;
+  margin: 8px 0 0;
   font-family: 'Parisienne', cursive;
   font-size: clamp(3.6rem, 9vw, 6.6rem);
   line-height: 1;
   font-weight: 400;
   letter-spacing: 0.02em;
-}
-
-header p {
-  max-width: 640px;
-  margin: 0 auto;
-  font-size: 1rem;
-  line-height: 1.8;
-  color: rgba(255, 252, 247, 0.88);
-  font-weight: 400;
 }
 
 nav {
@@ -161,9 +138,8 @@ main {
 }
 
 .hero-card {
-  display: grid;
-  grid-template-columns: 1.4fr 0.9fr;
-  gap: 24px;
+  max-width: 760px;
+  margin: 0 auto;
 }
 
 .hero-copy h2,
@@ -181,54 +157,6 @@ main {
 .section-card p {
   font-size: 1.02rem;
   line-height: 1.75;
-}
-
-.tag-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-.tag {
-  padding: 10px 16px;
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(255, 252, 247, 0.95), rgba(237, 245, 234, 0.9));
-  border: 1px solid rgba(111, 143, 118, 0.12);
-  font-size: 0.95rem;
-  box-shadow: 0 10px 24px rgba(53, 84, 63, 0.08);
-  font-weight: 500;
-}
-
-.garden-note {
-  display: grid;
-  gap: 16px;
-  align-content: start;
-}
-
-.petal-panel {
-  min-height: 100%;
-  border-radius: 38px;
-  padding: 24px;
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.9), transparent 18%),
-    radial-gradient(circle at 78% 28%, rgba(242, 217, 221, 0.8), transparent 20%),
-    radial-gradient(circle at 30% 84%, rgba(220, 233, 220, 0.9), transparent 22%),
-    linear-gradient(180deg, rgba(255, 252, 247, 0.9), rgba(237, 245, 234, 0.95));
-  border: 1px solid rgba(111, 143, 118, 0.12);
-}
-
-.petal-panel h3 {
-  margin: 0 0 12px;
-  font-family: 'Poppins', sans-serif;
-  font-size: 1.45rem;
-  font-weight: 600;
-}
-
-.petal-list {
-  margin: 0;
-  padding-left: 18px;
-  line-height: 1.8;
 }
 
 .search-bar {
@@ -353,10 +281,6 @@ main {
     padding-top: 56px;
   }
 
-  .hero-card {
-    grid-template-columns: 1fr;
-  }
-
   .book-row {
     flex-direction: column;
     align-items: center;
@@ -378,9 +302,7 @@ main {
 <body>
 
 <header>
-  <div class="title-mark">Greenhouse Shelf • Floral Reviews</div>
   <h1>Reviews by Royce</h1>
-  <p>A soft little glasshouse for romantasy reviews, favorite tropes, and the books currently blooming at the top of the TBR.</p>
 </header>
 
 <nav>
@@ -394,25 +316,9 @@ main {
   <div id="home" class="page active">
     <div class="section-card hero-card">
       <div class="hero-copy">
-        <h2>Welcome to the greenhouse</h2>
+        <h2>Welcome</h2>
         <p>I’m an avid reader who loves romantasy, strong characters, dreamy worldbuilding, and stories that feel like they were made to be annotated.</p>
         <p>This space is for tracking the books I’ve loved, the ones I’m still thinking about, and the reads worth passing straight to the group chat.</p>
-        <div class="tag-row">
-          <span class="tag">Soft florals</span>
-          <span class="tag">Romantasy favorites</span>
-          <span class="tag">BookTok energy</span>
-          <span class="tag">Cozy greenhouse vibes</span>
-        </div>
-      </div>
-      <div class="garden-note">
-        <div class="petal-panel">
-          <h3>Inside this shelf</h3>
-          <ul class="petal-list">
-            <li>Thoughtful reviews with star and spice ratings</li>
-            <li>A separate tab just for what I’m currently reading</li>
-            <li>A quick guide to how spicy each rec feels</li>
-          </ul>
-        </div>
       </div>
     </div>
   </div>
