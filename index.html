@@ -401,6 +401,27 @@ main {
   margin: 0;
 }
 
+.spoiler-toggle {
+  margin-top: 8px;
+  padding: 9px 14px;
+  border: 1px solid rgba(200, 116, 152, 0.16);
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 247, 243, 0.96), rgba(241, 232, 247, 0.92));
+  color: var(--text);
+  font: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.spoiler-content {
+  display: none;
+  margin-top: 10px;
+}
+
+.spoiler-content.open {
+  display: block;
+}
+
 .metric-empty {
   font-size: 0.92rem;
   margin: 0;
@@ -696,6 +717,7 @@ function renderMetricBlock(type, value) {
 }
 
 function renderFullBookContent(book) {
+  const summaryId = `summary-${String(book.title || "book").toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
   return `
     <div class="book-card">
       <div class="book-row">
@@ -705,7 +727,10 @@ function renderFullBookContent(book) {
           <p class="meta-line">${book.author}</p>
           <div class="review-section">
             <h4>Summary</h4>
-            <p>${book.summary || "No summary added yet."}</p>
+            <button class="spoiler-toggle" onclick="toggleSpoiler('${summaryId}', this)">Unhide (contains spoilers)</button>
+            <div id="${summaryId}" class="spoiler-content">
+              <p>${book.summary || "No summary added yet."}</p>
+            </div>
           </div>
           <div class="review-section">
             <h4>Review</h4>
@@ -734,6 +759,13 @@ function closeBookModal() {
   document.getElementById("bookModal").classList.remove("open");
   document.getElementById("bookModalContent").innerHTML = "";
   document.body.style.overflow = "";
+}
+
+function toggleSpoiler(id, button) {
+  const content = document.getElementById(id);
+  if (!content) return;
+  const isOpen = content.classList.toggle("open");
+  button.textContent = isOpen ? "Hide Summary" : "Unhide (contains spoilers)";
 }
 
 async function fetchBooks() {
