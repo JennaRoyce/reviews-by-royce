@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reviews by Royce</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 * {
@@ -13,18 +13,17 @@
 }
 
 :root {
-  --sage-50: #f8fbf5;
-  --sage-100: #edf5ea;
-  --sage-200: #dce9dc;
-  --sage-300: #c7d8c7;
-  --sage-500: #768f73;
-  --sage-700: #35543f;
-  --blush: #ead8cc;
-  --rose: #b98971;
-  --cream: rgba(255, 252, 247, 0.88);
-  --text: #314438;
-  --warm-text: #765f4c;
-  --shadow: 0 24px 60px rgba(53, 84, 63, 0.12);
+  --sage-100: #edf3ea;
+  --sage-300: #bfd0c0;
+  --sage-500: #7f9a82;
+  --sage-700: #536b57;
+  --petal: #f4ddd8;
+  --rose: #c88e86;
+  --cream: #fffaf5;
+  --paper: rgba(255, 251, 246, 0.9);
+  --text: #6e5545;
+  --text-soft: #8c6e5b;
+  --shadow: 0 24px 60px rgba(121, 102, 88, 0.12);
 }
 
 body {
@@ -33,9 +32,9 @@ body {
   font-family: 'Poppins', sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at top left, rgba(234, 216, 204, 0.3), transparent 20%),
-    radial-gradient(circle at top right, rgba(199, 216, 199, 0.55), transparent 24%),
-    linear-gradient(180deg, #f9fcf7 0%, #eef6ec 38%, #edf2e8 100%);
+    radial-gradient(circle at 12% 12%, rgba(244, 221, 216, 0.75), transparent 18%),
+    radial-gradient(circle at 88% 10%, rgba(191, 208, 192, 0.55), transparent 20%),
+    linear-gradient(180deg, #f8fbf6 0%, #eff5ed 36%, #f8f1ea 100%);
   min-height: 100vh;
 }
 
@@ -50,42 +49,45 @@ body::after {
 }
 
 body::before {
-  top: 90px;
-  left: -60px;
-  width: 240px;
+  top: 120px;
+  left: -40px;
+  width: 280px;
   height: 420px;
   background:
-    radial-gradient(circle at 60% 14%, rgba(255, 255, 255, 0.65), transparent 13%),
-    radial-gradient(ellipse at 50% 50%, rgba(199, 216, 199, 0.22), transparent 56%);
-  border-radius: 55% 45% 60% 40% / 40% 60% 40% 60%;
-  filter: blur(8px);
+    radial-gradient(circle at 32% 18%, rgba(244, 221, 216, 0.72), transparent 15%),
+    radial-gradient(circle at 58% 42%, rgba(191, 208, 192, 0.28), transparent 28%),
+    radial-gradient(circle at 42% 72%, rgba(255, 255, 255, 0.55), transparent 16%);
+  border-radius: 46% 54% 58% 42% / 42% 55% 45% 58%;
+  filter: blur(12px);
 }
 
 body::after {
-  right: -40px;
-  bottom: 120px;
-  width: 260px;
-  height: 260px;
+  right: -20px;
+  bottom: 100px;
+  width: 300px;
+  height: 300px;
   background:
-    radial-gradient(circle at 30% 30%, rgba(234, 216, 204, 0.28), transparent 24%),
-    radial-gradient(circle at 65% 60%, rgba(199, 216, 199, 0.22), transparent 36%);
-  border-radius: 50%;
-  filter: blur(10px);
+    radial-gradient(circle at 26% 28%, rgba(244, 221, 216, 0.56), transparent 20%),
+    radial-gradient(circle at 62% 34%, rgba(255, 255, 255, 0.55), transparent 16%),
+    radial-gradient(circle at 64% 66%, rgba(191, 208, 192, 0.28), transparent 24%);
+  border-radius: 50% 50% 42% 58%;
+  filter: blur(14px);
 }
 
 header {
   position: relative;
   overflow: hidden;
-  color: #fefcf8;
-  padding: 64px 24px 52px;
+  color: var(--text);
+  padding: 70px 24px 42px;
   text-align: center;
   background:
-    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.18), transparent 20%),
-    radial-gradient(circle at 84% 26%, rgba(234, 216, 204, 0.16), transparent 18%),
-    linear-gradient(140deg, rgba(53, 84, 63, 0.96), rgba(119, 149, 116, 0.82));
-  border-bottom-left-radius: 56px;
-  border-bottom-right-radius: 56px;
-  box-shadow: inset 0 -22px 50px rgba(255, 255, 255, 0.05);
+    radial-gradient(circle at 18% 24%, rgba(244, 221, 216, 0.82), transparent 18%),
+    radial-gradient(circle at 82% 20%, rgba(191, 208, 192, 0.7), transparent 22%),
+    linear-gradient(180deg, rgba(255, 250, 245, 0.96), rgba(247, 239, 231, 0.92));
+  border-bottom-left-radius: 64px;
+  border-bottom-right-radius: 64px;
+  border: 1px solid rgba(200, 142, 134, 0.12);
+  box-shadow: 0 18px 40px rgba(121, 102, 88, 0.08);
 }
 
 header::after {
@@ -93,42 +95,41 @@ header::after {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(115deg, transparent 0 38%, rgba(255, 255, 255, 0.08) 38% 40%, transparent 40% 100%),
-    linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.04));
+    radial-gradient(circle at 50% 120%, rgba(127, 154, 130, 0.14), transparent 38%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 48%);
   pointer-events: none;
 }
 
 header h1 {
   position: relative;
   z-index: 1;
-  margin: 8px 0 0;
-  font-family: 'Dancing Script', cursive;
-  font-size: clamp(4rem, 9vw, 6.4rem);
-  line-height: 1;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2.8rem, 7vw, 4.8rem);
+  line-height: 1.05;
   font-weight: 600;
-  letter-spacing: 0.02em;
-  text-shadow: 0 8px 24px rgba(36, 58, 43, 0.25);
+  letter-spacing: -0.03em;
 }
 
 nav {
   display: flex;
   justify-content: center;
   gap: 12px;
-  padding: 20px 20px 0;
-  margin-top: 8px;
+  padding: 18px 20px 0;
+  margin-top: 4px;
   flex-wrap: wrap;
   position: relative;
   z-index: 2;
 }
 
 nav button {
-  background: rgba(255, 252, 247, 0.9);
-  border: 1px solid rgba(118, 143, 115, 0.16);
-  color: var(--sage-700);
+  background: rgba(255, 251, 246, 0.94);
+  border: 1px solid rgba(200, 142, 134, 0.14);
+  color: var(--text);
   padding: 12px 20px;
   border-radius: 999px;
   cursor: pointer;
-  box-shadow: 0 10px 24px rgba(53, 84, 63, 0.08);
+  box-shadow: 0 10px 24px rgba(121, 102, 88, 0.08);
   transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
   font: inherit;
   font-weight: 500;
@@ -136,9 +137,9 @@ nav button {
 
 nav button:hover,
 nav button.active-tab {
-  background: linear-gradient(180deg, #ffffff, #eef2e9);
+  background: linear-gradient(180deg, #fffdfb, #f6ebe5);
   transform: translateY(-2px);
-  box-shadow: 0 16px 36px rgba(53, 84, 63, 0.12);
+  box-shadow: 0 16px 36px rgba(121, 102, 88, 0.12);
 }
 
 main {
@@ -159,13 +160,14 @@ main {
 
 .section-card {
   background:
-    radial-gradient(circle at top right, rgba(255, 255, 255, 0.38), transparent 18%),
-    linear-gradient(180deg, rgba(255, 252, 247, 0.96), rgba(248, 252, 246, 0.92));
+    radial-gradient(circle at top right, rgba(244, 221, 216, 0.28), transparent 18%),
+    radial-gradient(circle at bottom left, rgba(191, 208, 192, 0.16), transparent 20%),
+    linear-gradient(180deg, rgba(255, 252, 247, 0.97), rgba(255, 248, 241, 0.95));
   border-radius: 36px;
   padding: 30px;
   margin-bottom: 24px;
-  border: 1px solid rgba(118, 143, 115, 0.12);
-  box-shadow: 0 24px 55px rgba(53, 84, 63, 0.1);
+  border: 1px solid rgba(200, 142, 134, 0.12);
+  box-shadow: 0 24px 55px rgba(121, 102, 88, 0.1);
   backdrop-filter: blur(14px);
 }
 
@@ -181,7 +183,7 @@ main {
   font-family: 'Poppins', sans-serif;
   font-size: clamp(1.9rem, 4vw, 2.7rem);
   line-height: 1.1;
-  color: var(--sage-700);
+  color: var(--text);
   font-weight: 600;
 }
 
@@ -193,33 +195,34 @@ main {
 
 .hero-copy h2,
 .hero-copy p {
-  color: var(--warm-text);
+  color: var(--text);
 }
 
 .search-bar {
   width: 100%;
   padding: 16px 18px;
   border-radius: 999px;
-  border: 1px solid rgba(118, 143, 115, 0.16);
+  border: 1px solid rgba(200, 142, 134, 0.16);
   margin-bottom: 22px;
-  box-shadow: 0 12px 30px rgba(53, 84, 63, 0.08);
+  box-shadow: 0 12px 30px rgba(121, 102, 88, 0.08);
   background: rgba(255, 253, 250, 0.96);
   font: inherit;
 }
 
 .search-bar:focus {
-  outline: 2px solid rgba(211, 145, 157, 0.35);
+  outline: 2px solid rgba(200, 142, 134, 0.35);
   outline-offset: 3px;
 }
 
 .book-card {
   background:
-    radial-gradient(circle at top right, rgba(234, 216, 204, 0.22), transparent 18%),
-    linear-gradient(180deg, rgba(255, 250, 245, 0.99), rgba(247, 241, 233, 0.97));
+    radial-gradient(circle at top right, rgba(244, 221, 216, 0.24), transparent 18%),
+    radial-gradient(circle at bottom left, rgba(191, 208, 192, 0.14), transparent 22%),
+    linear-gradient(180deg, rgba(255, 251, 247, 0.99), rgba(250, 242, 236, 0.97));
   border-radius: 34px;
   padding: 22px;
   margin-bottom: 20px;
-  border: 1px solid rgba(185, 137, 113, 0.12);
+  border: 1px solid rgba(200, 142, 134, 0.12);
   box-shadow: 0 18px 40px rgba(118, 95, 76, 0.1);
 }
 
@@ -247,7 +250,7 @@ main {
 }
 
 .meta-line {
-  color: var(--warm-text);
+  color: var(--text-soft);
   font-weight: 700;
 }
 
@@ -268,31 +271,31 @@ main {
   display: grid;
   gap: 4px;
   margin-top: 6px;
-  color: var(--warm-text);
+  color: var(--text-soft);
   font-size: 0.95rem;
 }
 
 .goodreads {
   display: inline-block;
   margin-top: 14px;
-  color: var(--sage-700);
+  color: var(--text);
   text-decoration: none;
   padding: 10px 16px;
   border-radius: 999px;
-  background: rgba(255, 248, 241, 0.92);
-  border: 1px solid rgba(185, 137, 113, 0.14);
+  background: rgba(255, 246, 240, 0.94);
+  border: 1px solid rgba(200, 142, 134, 0.14);
 }
 
 .goodreads:hover {
   text-decoration: none;
-  background: white;
+  background: #fffdfb;
 }
 
 .empty-state {
   padding: 22px;
   border-radius: 32px;
-  background: rgba(248, 251, 245, 0.86);
-  border: 1px dashed rgba(118, 143, 115, 0.28);
+  background: rgba(255, 248, 241, 0.86);
+  border: 1px dashed rgba(200, 142, 134, 0.24);
 }
 
 .spice-grid {
@@ -305,9 +308,9 @@ main {
   padding: 18px;
   border-radius: 32px;
   background:
-    radial-gradient(circle at top right, rgba(255, 255, 255, 0.3), transparent 18%),
-    linear-gradient(180deg, rgba(255, 249, 243, 0.95), rgba(241, 232, 221, 0.72));
-  border: 1px solid rgba(185, 137, 113, 0.14);
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.34), transparent 18%),
+    linear-gradient(180deg, rgba(255, 249, 243, 0.95), rgba(244, 221, 216, 0.46));
+  border: 1px solid rgba(200, 142, 134, 0.14);
 }
 
 .spice-item strong {
