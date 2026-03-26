@@ -332,8 +332,14 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 18px;
-  align-items: center;
+  align-items: flex-start;
   margin-top: 16px;
+}
+
+.rating-block {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
 }
 
 .stars, .spice {
@@ -345,12 +351,27 @@ main {
   border: 1px solid rgba(200, 116, 152, 0.1);
 }
 
-.rating-details {
-  display: grid;
-  gap: 4px;
-  margin-top: 10px;
+.rating-label {
   color: var(--text-soft);
   font-size: 0.9rem;
+  margin: 0;
+}
+
+.review-section {
+  margin-top: 14px;
+}
+
+.review-section h4 {
+  margin: 0 0 6px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+.review-section p {
+  margin: 0;
 }
 
 .goodreads {
@@ -426,12 +447,16 @@ main {
     text-align: center;
   }
 
-  .rating-row {
-    justify-content: center;
-  }
+	  .rating-row {
+	    justify-content: center;
+	  }
 
-  .book-card img {
-    width: min(180px, 100%);
+	  .rating-block {
+	    justify-items: center;
+	  }
+
+	  .book-card img {
+	    width: min(180px, 100%);
     max-width: 180px;
   }
 }
@@ -561,14 +586,23 @@ function renderCurrent() {
         <div>
           <h3>${current.title}</h3>
           <p class="meta-line">${current.author}</p>
-          <p>${current.summary}</p>
-          <div class="rating-row">
-            <p class="stars">${getStarDisplay(current.rating)}</p>
-            <p class="spice">${getSpiceDisplay(current.spice)}</p>
+          <div class="review-section">
+            <h4>Summary</h4>
+            <p>${current.summary || "No summary added yet."}</p>
           </div>
-          <div class="rating-details">
-            <p>Rating: ${getRatingLabel(current.rating)}</p>
-            <p>Spice: ${getSpiceLabel(current.spice)}</p>
+          <div class="review-section">
+            <h4>Review</h4>
+            <p>${current.review || "No written review added yet."}</p>
+          </div>
+          <div class="rating-row">
+            <div class="rating-block">
+              <p class="stars">${getStarDisplay(current.rating)}</p>
+              <p class="rating-label">Rating: ${getRatingLabel(current.rating)}</p>
+            </div>
+            <div class="rating-block">
+              <p class="spice">${getSpiceDisplay(current.spice)}</p>
+              <p class="rating-label">Spice: ${getSpiceLabel(current.spice)}</p>
+            </div>
           </div>
         </div>
       </div>
@@ -593,14 +627,23 @@ function renderBooks() {
           <div>
             <h3>${book.title}</h3>
             <p class="meta-line">${book.author}</p>
-            <p>${book.summary}</p>
-            <div class="rating-row">
-              <p class="stars">${getStarDisplay(book.rating)}</p>
-              <p class="spice">${getSpiceDisplay(book.spice)}</p>
+            <div class="review-section">
+              <h4>Summary</h4>
+              <p>${book.summary || "No summary added yet."}</p>
             </div>
-            <div class="rating-details">
-              <p>Rating: ${getRatingLabel(book.rating)}</p>
-              <p>Spice: ${getSpiceLabel(book.spice)}</p>
+            <div class="review-section">
+              <h4>Review</h4>
+              <p>${book.review || "No written review added yet."}</p>
+            </div>
+            <div class="rating-row">
+              <div class="rating-block">
+                <p class="stars">${getStarDisplay(book.rating)}</p>
+                <p class="rating-label">Rating: ${getRatingLabel(book.rating)}</p>
+              </div>
+              <div class="rating-block">
+                <p class="spice">${getSpiceDisplay(book.spice)}</p>
+                <p class="rating-label">Spice: ${getSpiceLabel(book.spice)}</p>
+              </div>
             </div>
             <a class="goodreads" href="${book.goodreads}" target="_blank">View on Goodreads</a>
           </div>
