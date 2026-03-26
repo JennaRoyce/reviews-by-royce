@@ -281,6 +281,10 @@ main {
     inset 0 1px 0 rgba(255, 255, 255, 0.72);
 }
 
+.compact-card {
+  padding: 22px;
+}
+
 .book-card::before {
   content: "";
   position: absolute;
@@ -292,6 +296,10 @@ main {
 
 .book-card::after {
   content: none;
+}
+
+.compact-card::before {
+  inset: 12px;
 }
 
 .book-row {
@@ -317,6 +325,25 @@ main {
   font-size: 1.68rem;
   font-weight: 600;
   letter-spacing: -0.02em;
+}
+
+.review-link {
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 2px 0 8px;
+  font: inherit;
+  font-size: 1.68rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  cursor: pointer;
+  text-align: left;
+}
+
+.review-link:hover {
+  color: #9b5778;
 }
 
 .meta-line {
@@ -374,6 +401,16 @@ main {
   margin: 0;
 }
 
+.metric-empty {
+  font-size: 0.92rem;
+  margin: 0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: rgba(255, 248, 243, 0.88);
+  border: 1px dashed rgba(200, 116, 152, 0.16);
+  color: var(--text-soft);
+}
+
 .goodreads {
   display: inline-block;
   margin-top: 18px;
@@ -425,6 +462,50 @@ main {
   margin-bottom: 8px;
 }
 
+.detail-modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(98, 66, 81, 0.42);
+  backdrop-filter: blur(8px);
+  z-index: 20;
+}
+
+.detail-modal.open {
+  display: flex;
+}
+
+.detail-panel {
+  position: relative;
+  width: min(920px, 100%);
+  max-height: min(88vh, 900px);
+  overflow: auto;
+  padding: 18px;
+  border-radius: 36px;
+  background: linear-gradient(180deg, rgba(255, 252, 249, 0.98), rgba(255, 244, 239, 0.96));
+  box-shadow: 0 30px 70px rgba(98, 66, 81, 0.2);
+}
+
+.modal-close {
+  position: sticky;
+  top: 0;
+  margin-left: auto;
+  display: block;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 247, 243, 0.96), rgba(241, 232, 247, 0.92));
+  color: var(--text);
+  font: inherit;
+  font-size: 1.2rem;
+  cursor: pointer;
+  z-index: 1;
+}
+
 @keyframes bloom {
   from {
     opacity: 0;
@@ -441,11 +522,11 @@ main {
     padding-top: 56px;
   }
 
-  .book-row {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+	  .book-row {
+	    flex-direction: column;
+	    align-items: center;
+	    text-align: center;
+	  }
 
 	  .rating-row {
 	    justify-content: center;
@@ -455,11 +536,16 @@ main {
 	    justify-items: center;
 	  }
 
+	  .review-link {
+	    text-align: center;
+	  }
+
 	  .book-card img {
 	    width: min(180px, 100%);
-    max-width: 180px;
-  }
-}
+	    min-width: 0;
+	    max-width: 180px;
+	  }
+	}
 </style>
 </head>
 
@@ -519,27 +605,42 @@ main {
   </div>
 </main>
 
+<div id="bookModal" class="detail-modal" onclick="if (event.target === this) closeBookModal()">
+  <div class="detail-panel">
+    <button class="modal-close" onclick="closeBookModal()" aria-label="Close review">×</button>
+    <div id="bookModalContent"></div>
+  </div>
+</div>
+
 <script>
 const SHEET_URL = "https://script.google.com/macros/s/AKfycbw-zNUkSECEgDezH0JVQqbXsYT8r-epC9fvCctq_A9--KmfryC7yN_kVbyrPQYczgLP/exec";
 
 let books = [];
 
 function getStarDisplay(rating) {
+  if (!hasMetricValue(rating)) return "";
   return "⭐".repeat(Number(rating) || 0);
 }
 
 function getSpiceDisplay(spice) {
+  if (!hasMetricValue(spice)) return "";
   return "🌶️".repeat(Number(spice) || 0);
 }
 
 function getSpiceLabel(spice) {
+  if (!hasMetricValue(spice)) return "No spice value set";
   const level = Number(spice) || 0;
   return level === 0 ? "No spice" : `${level}/5 chilis`;
 }
 
 function getRatingLabel(rating) {
+  if (!hasMetricValue(rating)) return "No rating set";
   const level = Number(rating) || 0;
   return `${level}/5 stars`;
+}
+
+function hasMetricValue(value) {
+  return value !== undefined && value !== null && String(value).trim() !== "";
 }
 
 function normalizeImageUrl(url) {
@@ -557,6 +658,62 @@ function normalizeImageUrl(url) {
   }
 
   return trimmed;
+}
+
+function renderMetricBlock(type, value) {
+  const isRating = type === "rating";
+  const emoji = isRating ? getStarDisplay(value) : getSpiceDisplay(value);
+  const label = isRating ? getRatingLabel(value) : getSpiceLabel(value);
+  const className = isRating ? "stars" : "spice";
+  const title = isRating ? "Rating" : "Spice";
+
+  return `
+    <div class="rating-block">
+      ${emoji ? `<p class="${className}">${emoji}</p>` : `<p class="metric-empty">Not set</p>`}
+      <p class="rating-label">${title}: ${label}</p>
+    </div>
+  `;
+}
+
+function renderFullBookContent(book) {
+  return `
+    <div class="book-card">
+      <div class="book-row">
+        <img src="${normalizeImageUrl(book.image)}" alt="${book.title} cover" onerror="this.style.display='none'">
+        <div>
+          <h3>${book.title}</h3>
+          <p class="meta-line">${book.author}</p>
+          <div class="review-section">
+            <h4>Summary</h4>
+            <p>${book.summary || "No summary added yet."}</p>
+          </div>
+          <div class="review-section">
+            <h4>Review</h4>
+            <p>${book.review || "No written review added yet."}</p>
+          </div>
+          <div class="rating-row">
+            ${renderMetricBlock("rating", book.rating)}
+            ${renderMetricBlock("spice", book.spice)}
+          </div>
+          <a class="goodreads" href="${book.goodreads}" target="_blank">View on Goodreads</a>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function openBookModal(index) {
+  const book = books[index];
+  if (!book) return;
+  document.getElementById("bookModalContent").innerHTML = renderFullBookContent(book);
+  document.getElementById("bookModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeBookModal() {
+  document.getElementById("bookModal").classList.remove("open");
+  document.getElementById("bookModalContent").innerHTML = "";
+  document.body.style.overflow = "";
 }
 
 async function fetchBooks() {
@@ -580,30 +737,12 @@ function renderCurrent() {
   }
 
   currentContainer.innerHTML = `
-    <div class="book-card">
+    <div class="book-card compact-card">
       <div class="book-row">
         <img src="${normalizeImageUrl(current.image)}" alt="${current.title} cover" onerror="this.style.display='none'">
         <div>
           <h3>${current.title}</h3>
           <p class="meta-line">${current.author}</p>
-          <div class="review-section">
-            <h4>Summary</h4>
-            <p>${current.summary || "No summary added yet."}</p>
-          </div>
-          <div class="review-section">
-            <h4>Review</h4>
-            <p>${current.review || "No written review added yet."}</p>
-          </div>
-          <div class="rating-row">
-            <div class="rating-block">
-              <p class="stars">${getStarDisplay(current.rating)}</p>
-              <p class="rating-label">Rating: ${getRatingLabel(current.rating)}</p>
-            </div>
-            <div class="rating-block">
-              <p class="spice">${getSpiceDisplay(current.spice)}</p>
-              <p class="rating-label">Spice: ${getSpiceLabel(current.spice)}</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -616,36 +755,18 @@ function renderBooks() {
   list.innerHTML = "";
 
   books
-    .filter(b => b.title.toLowerCase().includes(term))
-    .forEach(book => {
+    .map((book, index) => ({ book, index }))
+    .filter(({ book }) => book.title.toLowerCase().includes(term))
+    .forEach(({ book, index }) => {
       const card = document.createElement("div");
-      card.className = "book-card";
+      card.className = "book-card compact-card";
 
       card.innerHTML = `
         <div class="book-row">
           <img src="${normalizeImageUrl(book.image)}" alt="${book.title} cover" onerror="this.style.display='none'">
           <div>
-            <h3>${book.title}</h3>
+            <button class="review-link" onclick="openBookModal(${index})">${book.title}</button>
             <p class="meta-line">${book.author}</p>
-            <div class="review-section">
-              <h4>Summary</h4>
-              <p>${book.summary || "No summary added yet."}</p>
-            </div>
-            <div class="review-section">
-              <h4>Review</h4>
-              <p>${book.review || "No written review added yet."}</p>
-            </div>
-            <div class="rating-row">
-              <div class="rating-block">
-                <p class="stars">${getStarDisplay(book.rating)}</p>
-                <p class="rating-label">Rating: ${getRatingLabel(book.rating)}</p>
-              </div>
-              <div class="rating-block">
-                <p class="spice">${getSpiceDisplay(book.spice)}</p>
-                <p class="rating-label">Spice: ${getSpiceLabel(book.spice)}</p>
-              </div>
-            </div>
-            <a class="goodreads" href="${book.goodreads}" target="_blank">View on Goodreads</a>
           </div>
         </div>
       `;
