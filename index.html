@@ -466,9 +466,9 @@ main {
   position: fixed;
   inset: 0;
   display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0;
   background: rgba(98, 66, 81, 0.42);
   backdrop-filter: blur(8px);
   z-index: 20;
@@ -480,18 +480,22 @@ main {
 
 .detail-panel {
   position: relative;
-  width: min(920px, 100%);
-  max-height: min(88vh, 900px);
+  width: 100%;
+  height: 100%;
   overflow: auto;
-  padding: 18px;
-  border-radius: 36px;
+  padding: 32px 20px 40px;
+  border-radius: 0;
   background: linear-gradient(180deg, rgba(255, 252, 249, 0.98), rgba(255, 244, 239, 0.96));
-  box-shadow: 0 30px 70px rgba(98, 66, 81, 0.2);
+}
+
+.detail-inner {
+  width: min(980px, 100%);
+  margin: 0 auto;
 }
 
 .modal-close {
   position: sticky;
-  top: 0;
+  top: 8px;
   margin-left: auto;
   display: block;
   width: 42px;
@@ -607,8 +611,10 @@ main {
 
 <div id="bookModal" class="detail-modal" onclick="if (event.target === this) closeBookModal()">
   <div class="detail-panel">
-    <button class="modal-close" onclick="closeBookModal()" aria-label="Close review">×</button>
-    <div id="bookModalContent"></div>
+    <div class="detail-inner">
+      <button class="modal-close" onclick="closeBookModal()" aria-label="Close review">×</button>
+      <div id="bookModalContent"></div>
+    </div>
   </div>
 </div>
 
