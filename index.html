@@ -13,17 +13,18 @@
 }
 
 :root {
-  --sage-50: #f6f3ec;
-  --sage-100: #e8e3d5;
-  --sage-200: #d8d6c2;
-  --sage-300: #bfd0be;
-  --sage-500: #7c9277;
-  --sage-700: #5f4b3b;
+  --sage-50: #f8fbf5;
+  --sage-100: #edf5ea;
+  --sage-200: #dce9dc;
+  --sage-300: #c7d8c7;
+  --sage-500: #768f73;
+  --sage-700: #35543f;
   --blush: #ead8cc;
   --rose: #b98971;
-  --cream: rgba(251, 247, 240, 0.9);
-  --text: #4a4036;
-  --shadow: 0 24px 60px rgba(95, 75, 59, 0.12);
+  --cream: rgba(255, 252, 247, 0.88);
+  --text: #314438;
+  --warm-text: #765f4c;
+  --shadow: 0 24px 60px rgba(53, 84, 63, 0.12);
 }
 
 body {
@@ -31,9 +32,9 @@ body {
   font-family: 'Poppins', sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at top left, rgba(185, 137, 113, 0.16), transparent 26%),
-    radial-gradient(circle at top right, rgba(191, 208, 190, 0.5), transparent 26%),
-    linear-gradient(180deg, #fbf8f2 0%, #edf1e8 38%, #efe4d9 100%);
+    radial-gradient(circle at top left, rgba(185, 137, 113, 0.12), transparent 24%),
+    radial-gradient(circle at top right, rgba(199, 216, 199, 0.58), transparent 24%),
+    linear-gradient(180deg, #f9fcf7 0%, #edf5ea 42%, #edf1e7 100%);
   min-height: 100vh;
 }
 
@@ -45,7 +46,7 @@ header {
   text-align: center;
   background:
     radial-gradient(circle at top, rgba(255, 255, 255, 0.12), transparent 32%),
-    linear-gradient(135deg, rgba(101, 122, 93, 0.95), rgba(139, 118, 95, 0.82));
+    linear-gradient(135deg, rgba(60, 90, 67, 0.95), rgba(123, 150, 123, 0.8));
   border-bottom-left-radius: 46px;
   border-bottom-right-radius: 46px;
 }
@@ -95,7 +96,7 @@ nav {
 
 nav button {
   background: rgba(255, 252, 247, 0.88);
-  border: 1px solid rgba(124, 146, 119, 0.16);
+  border: 1px solid rgba(118, 143, 115, 0.16);
   color: var(--sage-700);
   padding: 12px 20px;
   border-radius: 999px;
@@ -132,7 +133,7 @@ main {
   border-radius: 40px;
   padding: 28px;
   margin-bottom: 24px;
-  border: 1px solid rgba(124, 146, 119, 0.12);
+  border: 1px solid rgba(118, 143, 115, 0.12);
   box-shadow: var(--shadow);
   backdrop-filter: blur(14px);
 }
@@ -149,7 +150,7 @@ main {
   font-family: 'Poppins', sans-serif;
   font-size: clamp(1.9rem, 4vw, 2.7rem);
   line-height: 1.1;
-  color: #5a4b3f;
+  color: var(--sage-700);
   font-weight: 600;
 }
 
@@ -163,9 +164,9 @@ main {
   width: 100%;
   padding: 16px 18px;
   border-radius: 999px;
-  border: 1px solid rgba(124, 146, 119, 0.16);
+  border: 1px solid rgba(118, 143, 115, 0.16);
   margin-bottom: 22px;
-  box-shadow: 0 12px 30px rgba(95, 75, 59, 0.08);
+  box-shadow: 0 12px 30px rgba(53, 84, 63, 0.08);
   background: rgba(255, 252, 247, 0.95);
   font: inherit;
 }
@@ -177,12 +178,12 @@ main {
 
 .book-card {
   background:
-    linear-gradient(180deg, rgba(255, 250, 245, 0.98), rgba(236, 242, 233, 0.9));
+    linear-gradient(180deg, rgba(255, 250, 245, 0.98), rgba(244, 237, 228, 0.96));
   border-radius: 38px;
   padding: 22px;
   margin-bottom: 20px;
-  border: 1px solid rgba(124, 146, 119, 0.12);
-  box-shadow: 0 18px 40px rgba(95, 75, 59, 0.1);
+  border: 1px solid rgba(185, 137, 113, 0.12);
+  box-shadow: 0 18px 40px rgba(118, 95, 76, 0.1);
 }
 
 .book-row {
@@ -196,7 +197,7 @@ main {
   width: 120px;
   border-radius: 28px;
   object-fit: cover;
-  box-shadow: 0 14px 24px rgba(95, 75, 59, 0.16);
+  box-shadow: 0 14px 24px rgba(118, 95, 76, 0.16);
   background: rgba(255, 252, 247, 0.85);
 }
 
@@ -208,7 +209,7 @@ main {
 }
 
 .meta-line {
-  color: #7b654f;
+  color: var(--warm-text);
   font-weight: 700;
 }
 
@@ -229,7 +230,7 @@ main {
   display: grid;
   gap: 4px;
   margin-top: 6px;
-  color: #7b654f;
+  color: var(--warm-text);
   font-size: 0.95rem;
 }
 
@@ -240,8 +241,8 @@ main {
   text-decoration: none;
   padding: 10px 16px;
   border-radius: 999px;
-  background: rgba(249, 246, 239, 0.92);
-  border: 1px solid rgba(124, 146, 119, 0.14);
+  background: rgba(255, 248, 241, 0.92);
+  border: 1px solid rgba(185, 137, 113, 0.14);
 }
 
 .goodreads:hover {
@@ -252,8 +253,8 @@ main {
 .empty-state {
   padding: 22px;
   border-radius: 32px;
-  background: rgba(249, 246, 239, 0.86);
-  border: 1px dashed rgba(124, 146, 119, 0.28);
+  background: rgba(248, 251, 245, 0.86);
+  border: 1px dashed rgba(118, 143, 115, 0.28);
 }
 
 .spice-grid {
@@ -265,7 +266,7 @@ main {
 .spice-item {
   padding: 18px;
   border-radius: 32px;
-  background: linear-gradient(180deg, rgba(255, 249, 243, 0.95), rgba(228, 236, 224, 0.72));
+  background: linear-gradient(180deg, rgba(255, 249, 243, 0.95), rgba(241, 232, 221, 0.72));
   border: 1px solid rgba(185, 137, 113, 0.14);
 }
 
