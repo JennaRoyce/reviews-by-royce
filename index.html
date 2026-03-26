@@ -5,157 +5,447 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reviews by Royce</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
 
 <style>
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --sage-50: #f8fbf5;
+  --sage-100: #edf5ea;
+  --sage-200: #dce9dc;
+  --sage-300: #c4d9c6;
+  --sage-500: #6f8f76;
+  --sage-700: #35543f;
+  --blush: #f2d9dd;
+  --rose: #d3919d;
+  --cream: rgba(255, 252, 247, 0.86);
+  --text: #294234;
+  --shadow: 0 24px 60px rgba(53, 84, 63, 0.12);
+}
+
 body {
   margin: 0;
-  font-family: 'Inter', sans-serif;
-  background: #f3f7f4;
-  color: #2f3e34;
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(211, 145, 157, 0.22), transparent 26%),
+    radial-gradient(circle at top right, rgba(196, 217, 198, 0.6), transparent 24%),
+    linear-gradient(180deg, #f9fcf7 0%, #edf5ea 42%, #e6efe7 100%);
+  min-height: 100vh;
 }
 
 header {
-  background: #6f8f76;
-  color: white;
-  padding: 25px;
+  position: relative;
+  overflow: hidden;
+  color: #fefcf8;
+  padding: 58px 24px 40px;
   text-align: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.12), transparent 32%),
+    linear-gradient(180deg, rgba(93, 127, 101, 0.92), rgba(132, 164, 139, 0.72));
+  border-bottom-left-radius: 46px;
+  border-bottom-right-radius: 46px;
+}
+
+header::before,
+header::after {
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  filter: blur(6px);
+}
+
+header::before {
+  width: 220px;
+  height: 220px;
+  top: -70px;
+  left: -40px;
+}
+
+header::after {
+  width: 180px;
+  height: 180px;
+  bottom: -60px;
+  right: 8%;
+}
+
+.title-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 18px;
+  border-radius: 999px;
+  background: rgba(255, 252, 247, 0.18);
+  backdrop-filter: blur(12px);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+header h1 {
+  margin: 20px 0 8px;
+  font-family: 'Parisienne', cursive;
+  font-size: clamp(3.6rem, 9vw, 6.6rem);
+  line-height: 1;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+header p {
+  max-width: 640px;
+  margin: 0 auto;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255, 252, 247, 0.88);
+  font-weight: 400;
 }
 
 nav {
   display: flex;
   justify-content: center;
-  gap: 10px;
-  padding: 15px;
-  background: #e4efe7;
+  gap: 12px;
+  padding: 18px 20px 0;
+  margin-top: -16px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
 }
 
 nav button {
-  background: white;
-  border: none;
-  color: #4f6f57;
-  padding: 10px 18px;
-  border-radius: 25px;
+  background: rgba(255, 252, 247, 0.88);
+  border: 1px solid rgba(111, 143, 118, 0.14);
+  color: var(--sage-700);
+  padding: 12px 20px;
+  border-radius: 999px;
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  transition: 0.2s;
+  box-shadow: 0 10px 24px rgba(53, 84, 63, 0.08);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  font: inherit;
+  font-weight: 500;
 }
 
-nav button:hover {
-  background: #d8e8dc;
+nav button:hover,
+nav button.active-tab {
+  background: linear-gradient(180deg, #ffffff, #edf5ea);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(53, 84, 63, 0.12);
+}
+
+main {
+  width: min(1080px, calc(100% - 32px));
+  margin: 22px auto 60px;
 }
 
 .page {
   display: none;
-  padding: 30px;
-  max-width: 900px;
-  margin: auto;
+  animation: bloom 0.45s ease;
 }
 
-.active {
+.page.active {
   display: block;
 }
 
 .section-card {
-  background: white;
-  border-radius: 20px;
-  padding: 20px;
-  margin-bottom: 20px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  background: var(--cream);
+  border-radius: 40px;
+  padding: 28px;
+  margin-bottom: 24px;
+  border: 1px solid rgba(111, 143, 118, 0.12);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px);
+}
+
+.hero-card {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr;
+  gap: 24px;
+}
+
+.hero-copy h2,
+.section-card h2,
+#reviews h2 {
+  margin: 0 0 14px;
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
+  line-height: 1.1;
+  color: #264131;
+  font-weight: 600;
+}
+
+.hero-copy p,
+.section-card p {
+  font-size: 1.02rem;
+  line-height: 1.75;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.tag {
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(255, 252, 247, 0.95), rgba(237, 245, 234, 0.9));
+  border: 1px solid rgba(111, 143, 118, 0.12);
+  font-size: 0.95rem;
+  box-shadow: 0 10px 24px rgba(53, 84, 63, 0.08);
+  font-weight: 500;
+}
+
+.garden-note {
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+.petal-panel {
+  min-height: 100%;
+  border-radius: 38px;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.9), transparent 18%),
+    radial-gradient(circle at 78% 28%, rgba(242, 217, 221, 0.8), transparent 20%),
+    radial-gradient(circle at 30% 84%, rgba(220, 233, 220, 0.9), transparent 22%),
+    linear-gradient(180deg, rgba(255, 252, 247, 0.9), rgba(237, 245, 234, 0.95));
+  border: 1px solid rgba(111, 143, 118, 0.12);
+}
+
+.petal-panel h3 {
+  margin: 0 0 12px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 600;
+}
+
+.petal-list {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.8;
 }
 
 .search-bar {
   width: 100%;
-  padding: 12px;
-  border-radius: 25px;
-  border: none;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  padding: 16px 18px;
+  border-radius: 999px;
+  border: 1px solid rgba(111, 143, 118, 0.16);
+  margin-bottom: 22px;
+  box-shadow: 0 12px 30px rgba(53, 84, 63, 0.08);
+  background: rgba(255, 252, 247, 0.95);
+  font: inherit;
+}
+
+.search-bar:focus {
+  outline: 2px solid rgba(211, 145, 157, 0.35);
+  outline-offset: 3px;
 }
 
 .book-card {
-  background: white;
-  border-radius: 20px;
-  padding: 18px;
+  background:
+    linear-gradient(180deg, rgba(255, 252, 247, 0.98), rgba(237, 245, 234, 0.92));
+  border-radius: 38px;
+  padding: 22px;
   margin-bottom: 20px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+  border: 1px solid rgba(111, 143, 118, 0.12);
+  box-shadow: 0 18px 40px rgba(53, 84, 63, 0.1);
 }
 
 .book-row {
   display: flex;
-  gap: 18px;
+  gap: 20px;
+  align-items: flex-start;
 }
 
 .book-card img {
   max-width: 120px;
-  border-radius: 12px;
+  width: 120px;
+  border-radius: 28px;
+  object-fit: cover;
+  box-shadow: 0 14px 24px rgba(53, 84, 63, 0.16);
+}
+
+.book-card h3 {
+  margin: 4px 0 8px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.55rem;
+  font-weight: 600;
+}
+
+.meta-line {
+  color: #56705e;
+  font-weight: 700;
+}
+
+.rating-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  margin-top: 12px;
 }
 
 .stars, .spice {
   font-size: 1.1rem;
+  margin: 0;
 }
 
 .goodreads {
   display: inline-block;
-  margin-top: 8px;
-  color: #4f6f57;
+  margin-top: 14px;
+  color: var(--sage-700);
   text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255, 252, 247, 0.85);
+  border: 1px solid rgba(111, 143, 118, 0.12);
 }
 
 .goodreads:hover {
-  text-decoration: underline;
+  text-decoration: none;
+  background: white;
+}
+
+.empty-state {
+  padding: 22px;
+  border-radius: 32px;
+  background: rgba(255, 252, 247, 0.82);
+  border: 1px dashed rgba(111, 143, 118, 0.28);
+}
+
+.spice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+}
+
+.spice-item {
+  padding: 18px;
+  border-radius: 32px;
+  background: linear-gradient(180deg, rgba(255, 252, 247, 0.92), rgba(242, 217, 221, 0.35));
+  border: 1px solid rgba(211, 145, 157, 0.16);
+}
+
+.spice-item strong {
+  display: block;
+  margin-bottom: 8px;
+}
+
+@keyframes bloom {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @media(max-width:700px){
-  .book-row{flex-direction:column;align-items:center;text-align:center;}
+  header {
+    padding-top: 56px;
+  }
+
+  .hero-card {
+    grid-template-columns: 1fr;
+  }
+
+  .book-row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .rating-row {
+    justify-content: center;
+  }
+
+  .book-card img {
+    width: min(180px, 100%);
+    max-width: 180px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header>🌿 Reviews by Royce 🌿</header>
+<header>
+  <div class="title-mark">Greenhouse Shelf • Floral Reviews</div>
+  <h1>Reviews by Royce</h1>
+  <p>A soft little glasshouse for romantasy reviews, favorite tropes, and the books currently blooming at the top of the TBR.</p>
+</header>
 
 <nav>
-  <button onclick="showPage('home')">Home</button>
-  <button onclick="showPage('current')">Currently Reading</button>
-  <button onclick="showPage('reviews')">Reviews</button>
-  <button onclick="showPage('spice')">Spice Scale</button>
+  <button class="active-tab" data-page="home" onclick="showPage('home')">Home</button>
+  <button data-page="current" onclick="showPage('current')">Currently Reading</button>
+  <button data-page="reviews" onclick="showPage('reviews')">Reviews</button>
+  <button data-page="spice" onclick="showPage('spice')">Spice Scale</button>
 </nav>
 
-<div id="home" class="page active">
-  <div class="section-card">
-    <h2>Welcome</h2>
-    <p>I’m an avid reader who loves romantasy, strong characters, and immersive worlds.</p>
-    <p>This is where I track everything I’ve read, loved, and obsessed over.</p>
+<main>
+  <div id="home" class="page active">
+    <div class="section-card hero-card">
+      <div class="hero-copy">
+        <h2>Welcome to the greenhouse</h2>
+        <p>I’m an avid reader who loves romantasy, strong characters, dreamy worldbuilding, and stories that feel like they were made to be annotated.</p>
+        <p>This space is for tracking the books I’ve loved, the ones I’m still thinking about, and the reads worth passing straight to the group chat.</p>
+        <div class="tag-row">
+          <span class="tag">Soft florals</span>
+          <span class="tag">Romantasy favorites</span>
+          <span class="tag">BookTok energy</span>
+          <span class="tag">Cozy greenhouse vibes</span>
+        </div>
+      </div>
+      <div class="garden-note">
+        <div class="petal-panel">
+          <h3>Inside this shelf</h3>
+          <ul class="petal-list">
+            <li>Thoughtful reviews with star and spice ratings</li>
+            <li>A separate tab just for what I’m currently reading</li>
+            <li>A quick guide to how spicy each rec feels</li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
-<div id="current" class="page">
-  <div class="section-card">
-    <h2>Currently Reading</h2>
-    <div id="currentReading"></div>
+  <div id="current" class="page">
+    <div class="section-card">
+      <h2>Currently Reading</h2>
+      <p>The book in this tab is separate from the welcome page, so this section can feel like its own little reading journal corner.</p>
+      <div id="currentReading"></div>
+    </div>
   </div>
-</div>
 
-<div id="reviews" class="page">
-  <h2>Book Reviews</h2>
-  <input class="search-bar" id="search" placeholder="Search books..." oninput="renderBooks()">
-  <div id="bookList"></div>
-</div>
-
-<div id="spice" class="page">
-  <div class="section-card">
-    <h2>Spice Level Guide</h2>
-    <p>🌶️ = Minimal / Fade to black</p>
-    <p>🌶️🌶️ = Light romance</p>
-    <p>🌶️🌶️🌶️ = Moderate spice</p>
-    <p>🌶️🌶️🌶️🌶️ = Steamy</p>
-    <p>🌶️🌶️🌶️🌶️🌶️ = Very explicit</p>
+  <div id="reviews" class="page">
+    <div class="section-card">
+      <h2>Book Reviews</h2>
+      <input class="search-bar" id="search" placeholder="Search by title..." oninput="renderBooks()">
+      <div id="bookList"></div>
+    </div>
   </div>
-</div>
+
+  <div id="spice" class="page">
+    <div class="section-card">
+      <h2>Spice Level Guide</h2>
+      <div class="spice-grid">
+        <div class="spice-item"><strong>🌶️</strong>Minimal or fade-to-black romance.</div>
+        <div class="spice-item"><strong>🌶️🌶️</strong>Light tension with a little heat.</div>
+        <div class="spice-item"><strong>🌶️🌶️🌶️</strong>Moderate spice with clear on-page chemistry.</div>
+        <div class="spice-item"><strong>🌶️🌶️🌶️🌶️</strong>Steamy and frequent.</div>
+        <div class="spice-item"><strong>🌶️🌶️🌶️🌶️🌶️</strong>Very explicit and definitely not subtle.</div>
+      </div>
+    </div>
+  </div>
+</main>
 
 <script>
 const SHEET_URL = "PASTE_YOUR_API_LINK_HERE";
@@ -171,16 +461,29 @@ async function fetchBooks() {
 
 function renderCurrent() {
   const current = books.find(b => b.current === "yes");
-  if (!current) return;
+  const currentContainer = document.getElementById("currentReading");
 
-  document.getElementById("currentReading").innerHTML = `
+  if (!current) {
+    currentContainer.innerHTML = `
+      <div class="empty-state">
+        No current read is pinned yet. Add one in your sheet with <strong>current = yes</strong> and it will show up here.
+      </div>
+    `;
+    return;
+  }
+
+  currentContainer.innerHTML = `
     <div class="book-card">
       <div class="book-row">
-        <img src="${current.image}">
+        <img src="${current.image}" alt="${current.title} cover">
         <div>
           <h3>${current.title}</h3>
-          <p><strong>${current.author}</strong></p>
+          <p class="meta-line">${current.author}</p>
           <p>${current.summary}</p>
+          <div class="rating-row">
+            <p class="stars">${"⭐".repeat(current.rating || 0)}</p>
+            <p class="spice">${"🌶️".repeat(current.spice || 0)}</p>
+          </div>
         </div>
       </div>
     </div>
@@ -200,13 +503,15 @@ function renderBooks() {
 
       card.innerHTML = `
         <div class="book-row">
-          <img src="${book.image}">
+          <img src="${book.image}" alt="${book.title} cover">
           <div>
             <h3>${book.title}</h3>
-            <p><strong>${book.author}</strong></p>
+            <p class="meta-line">${book.author}</p>
             <p>${book.summary}</p>
-            <p class="stars">${"⭐".repeat(book.rating)}</p>
-            <p class="spice">${"🌶️".repeat(book.spice)}</p>
+            <div class="rating-row">
+              <p class="stars">${"⭐".repeat(book.rating || 0)}</p>
+              <p class="spice">${"🌶️".repeat(book.spice || 0)}</p>
+            </div>
             <a class="goodreads" href="${book.goodreads}" target="_blank">View on Goodreads</a>
           </div>
         </div>
@@ -214,11 +519,22 @@ function renderBooks() {
 
       list.appendChild(card);
     });
+
+  if (!list.children.length) {
+    list.innerHTML = `
+      <div class="empty-state">
+        Nothing matched that title. Try a different keyword and the shelf will refresh.
+      </div>
+    `;
+  }
 }
 
 function showPage(pageId) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById(pageId).classList.add('active');
+  document.querySelectorAll('nav button').forEach(button => {
+    button.classList.toggle('active-tab', button.dataset.page === pageId);
+  });
 }
 
 fetchBooks();
