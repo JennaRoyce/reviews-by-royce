@@ -819,6 +819,10 @@ function renderBooks() {
           <div>
             <button class="review-link" onclick="openBookModal(${index})">${book.title}</button>
             <p class="meta-line">${book.author}</p>
+            <div class="rating-row">
+              ${renderMetricBlock("rating", book.rating)}
+              ${renderMetricBlock("spice", book.spice)}
+            </div>
           </div>
         </div>
       `;
