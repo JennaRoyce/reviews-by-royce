@@ -438,7 +438,7 @@ main {
 
 .spice-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
 }
 
@@ -548,6 +548,10 @@ main {
 	    width: min(180px, 100%);
 	    min-width: 0;
 	    max-width: 180px;
+	  }
+
+	  .spice-grid {
+	    grid-template-columns: 1fr;
 	  }
 	}
 </style>
