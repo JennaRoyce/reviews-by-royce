@@ -21,6 +21,9 @@
   --berry-700: #7b4f63;
   --sage-200: #e4ece3;
   --sage-500: #9bb29c;
+  --lavender-200: #ebe2f5;
+  --lavender-400: #c5acd9;
+  --peach-200: #f6ded2;
   --gold-200: #f3e3c2;
   --gold-400: #d8b67c;
   --cream: rgba(255, 252, 248, 0.94);
@@ -38,9 +41,10 @@ body {
   font-family: 'Poppins', sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at 15% 18%, rgba(249, 219, 232, 0.82), transparent 18%),
-    radial-gradient(circle at 85% 8%, rgba(221, 233, 223, 0.48), transparent 18%),
-    radial-gradient(circle at 80% 38%, rgba(231, 182, 203, 0.26), transparent 16%),
+    radial-gradient(circle at 15% 18%, rgba(249, 219, 232, 0.78), transparent 18%),
+    radial-gradient(circle at 85% 8%, rgba(221, 233, 223, 0.46), transparent 18%),
+    radial-gradient(circle at 80% 38%, rgba(235, 226, 245, 0.38), transparent 16%),
+    radial-gradient(circle at 74% 72%, rgba(246, 222, 210, 0.28), transparent 18%),
     linear-gradient(180deg, #fffbfd 0%, #fff3f7 42%, #fffbf6 100%);
   min-height: 100vh;
 }
@@ -147,7 +151,7 @@ nav {
 }
 
 nav button {
-  background: linear-gradient(180deg, rgba(255, 251, 248, 0.98), rgba(252, 235, 243, 0.94));
+  background: linear-gradient(180deg, rgba(255, 251, 248, 0.98), rgba(250, 240, 247, 0.94));
   border: 1px solid rgba(200, 116, 152, 0.16);
   color: var(--text);
   padding: 12px 20px;
@@ -161,7 +165,7 @@ nav button {
 
 nav button:hover,
 nav button.active-tab {
-  background: linear-gradient(180deg, #fffdfc, #f8e4ee);
+  background: linear-gradient(180deg, #fffdfc, #f3e8f6);
   transform: translateY(-2px);
   box-shadow: 0 16px 36px rgba(121, 102, 88, 0.12);
 }
@@ -186,8 +190,8 @@ main {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at top right, rgba(244, 221, 216, 0.26), transparent 18%),
-    radial-gradient(circle at bottom left, rgba(221, 233, 223, 0.18), transparent 18%),
+    radial-gradient(circle at top right, rgba(244, 221, 216, 0.22), transparent 18%),
+    radial-gradient(circle at bottom left, rgba(221, 233, 223, 0.15), transparent 18%),
     linear-gradient(180deg, rgba(255, 252, 249, 0.98), rgba(255, 245, 240, 0.96));
   border-radius: 38px;
   padding: 32px;
@@ -206,20 +210,12 @@ main {
   height: 150px;
   background:
     var(--floral-right) center/contain no-repeat;
-  opacity: 0.8;
+  opacity: 0.5;
   pointer-events: none;
 }
 
 .section-card::after {
-  content: "";
-  position: absolute;
-  left: -12px;
-  bottom: -10px;
-  width: 130px;
-  height: 130px;
-  background: var(--floral-left) center/contain no-repeat;
-  opacity: 0.28;
-  pointer-events: none;
+  content: none;
 }
 
 .hero-card {
@@ -274,8 +270,8 @@ main {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at top right, rgba(244, 221, 216, 0.28), transparent 18%),
-    radial-gradient(circle at bottom left, rgba(221, 233, 223, 0.18), transparent 20%),
+    radial-gradient(circle at top right, rgba(244, 221, 216, 0.22), transparent 18%),
+    radial-gradient(circle at bottom left, rgba(235, 226, 245, 0.18), transparent 20%),
     linear-gradient(180deg, rgba(255, 252, 248, 0.99), rgba(255, 244, 239, 0.97));
   border-radius: 34px;
   padding: 22px;
@@ -285,15 +281,7 @@ main {
 }
 
 .book-card::after {
-  content: "";
-  position: absolute;
-  right: -10px;
-  bottom: -16px;
-  width: 120px;
-  height: 120px;
-  background: var(--floral-right) center/contain no-repeat;
-  opacity: 0.18;
-  pointer-events: none;
+  content: none;
 }
 
 .book-row {
@@ -352,7 +340,7 @@ main {
   text-decoration: none;
   padding: 10px 16px;
   border-radius: 999px;
-  background: linear-gradient(180deg, rgba(255, 247, 243, 0.96), rgba(251, 230, 239, 0.92));
+  background: linear-gradient(180deg, rgba(255, 247, 243, 0.96), rgba(241, 232, 247, 0.92));
   border: 1px solid rgba(200, 116, 152, 0.14);
 }
 
@@ -381,19 +369,12 @@ main {
   border-radius: 32px;
   background:
     radial-gradient(circle at top right, rgba(255, 255, 255, 0.34), transparent 18%),
-    linear-gradient(180deg, rgba(255, 249, 245, 0.96), rgba(246, 229, 236, 0.56));
+    linear-gradient(180deg, rgba(255, 249, 245, 0.96), rgba(241, 232, 247, 0.56));
   border: 1px solid rgba(200, 116, 152, 0.14);
 }
 
 .spice-item::after {
-  content: "";
-  position: absolute;
-  right: -4px;
-  bottom: -6px;
-  width: 62px;
-  height: 62px;
-  background: var(--floral-right) center/contain no-repeat;
-  opacity: 0.12;
+  content: none;
 }
 
 .spice-item strong {
