@@ -32,6 +32,9 @@ body {
   font-family: 'Poppins', sans-serif;
   color: var(--text);
   background:
+    radial-gradient(circle at 18% 26%, rgba(255, 255, 255, 0.45), transparent 8%),
+    radial-gradient(circle at 22% 30%, rgba(244, 221, 216, 0.55), transparent 10%),
+    radial-gradient(circle at 26% 26%, rgba(255, 255, 255, 0.4), transparent 8%),
     radial-gradient(circle at 12% 12%, rgba(244, 221, 216, 0.75), transparent 18%),
     radial-gradient(circle at 88% 10%, rgba(191, 208, 192, 0.55), transparent 20%),
     linear-gradient(180deg, #f8fbf6 0%, #eff5ed 36%, #f8f1ea 100%);
@@ -90,13 +93,29 @@ header {
   box-shadow: 0 18px 40px rgba(121, 102, 88, 0.08);
 }
 
+header::before {
+  content: "";
+  position: absolute;
+  inset: auto auto 14px 22px;
+  width: 180px;
+  height: 180px;
+  background:
+    radial-gradient(circle at 40% 34%, rgba(255, 255, 255, 0.72), transparent 10%),
+    radial-gradient(circle at 55% 44%, rgba(244, 221, 216, 0.75), transparent 16%),
+    radial-gradient(circle at 68% 30%, rgba(255, 255, 255, 0.6), transparent 9%),
+    radial-gradient(circle at 54% 62%, rgba(191, 208, 192, 0.38), transparent 16%);
+  filter: blur(4px);
+  opacity: 0.75;
+}
+
 header::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
     radial-gradient(circle at 50% 120%, rgba(127, 154, 130, 0.14), transparent 38%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 48%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent 48%),
+    linear-gradient(90deg, transparent 0 12%, rgba(200, 142, 134, 0.08) 12% 13%, transparent 13% 87%, rgba(200, 142, 134, 0.08) 87% 88%, transparent 88% 100%);
   pointer-events: none;
 }
 
@@ -109,6 +128,7 @@ header h1 {
   line-height: 1.05;
   font-weight: 600;
   letter-spacing: -0.03em;
+  text-shadow: 0 8px 20px rgba(255, 255, 255, 0.28);
 }
 
 nav {
@@ -123,7 +143,7 @@ nav {
 }
 
 nav button {
-  background: rgba(255, 251, 246, 0.94);
+  background: linear-gradient(180deg, rgba(255, 251, 246, 0.98), rgba(249, 240, 234, 0.92));
   border: 1px solid rgba(200, 142, 134, 0.14);
   color: var(--text);
   padding: 12px 20px;
@@ -159,6 +179,8 @@ main {
 }
 
 .section-card {
+  position: relative;
+  overflow: hidden;
   background:
     radial-gradient(circle at top right, rgba(244, 221, 216, 0.28), transparent 18%),
     radial-gradient(circle at bottom left, rgba(191, 208, 192, 0.16), transparent 20%),
@@ -171,9 +193,30 @@ main {
   backdrop-filter: blur(14px);
 }
 
+.section-card::before {
+  content: "";
+  position: absolute;
+  top: -24px;
+  right: -18px;
+  width: 140px;
+  height: 140px;
+  background:
+    radial-gradient(circle at 34% 34%, rgba(255, 255, 255, 0.74), transparent 10%),
+    radial-gradient(circle at 48% 48%, rgba(244, 221, 216, 0.56), transparent 20%),
+    radial-gradient(circle at 70% 34%, rgba(255, 255, 255, 0.58), transparent 9%),
+    radial-gradient(circle at 52% 72%, rgba(191, 208, 192, 0.24), transparent 16%);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
 .hero-card {
   max-width: 760px;
   margin: 0 auto;
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
 }
 
 .hero-copy h2,
@@ -215,6 +258,8 @@ main {
 }
 
 .book-card {
+  position: relative;
+  overflow: hidden;
   background:
     radial-gradient(circle at top right, rgba(244, 221, 216, 0.24), transparent 18%),
     radial-gradient(circle at bottom left, rgba(191, 208, 192, 0.14), transparent 22%),
@@ -224,6 +269,21 @@ main {
   margin-bottom: 20px;
   border: 1px solid rgba(200, 142, 134, 0.12);
   box-shadow: 0 18px 40px rgba(118, 95, 76, 0.1);
+}
+
+.book-card::after {
+  content: "";
+  position: absolute;
+  right: -24px;
+  bottom: -30px;
+  width: 120px;
+  height: 120px;
+  background:
+    radial-gradient(circle at 38% 32%, rgba(244, 221, 216, 0.52), transparent 14%),
+    radial-gradient(circle at 58% 50%, rgba(255, 255, 255, 0.56), transparent 12%),
+    radial-gradient(circle at 52% 68%, rgba(191, 208, 192, 0.22), transparent 18%);
+  opacity: 0.7;
+  pointer-events: none;
 }
 
 .book-row {
@@ -305,12 +365,24 @@ main {
 }
 
 .spice-item {
+  position: relative;
+  overflow: hidden;
   padding: 18px;
   border-radius: 32px;
   background:
     radial-gradient(circle at top right, rgba(255, 255, 255, 0.34), transparent 18%),
     linear-gradient(180deg, rgba(255, 249, 243, 0.95), rgba(244, 221, 216, 0.46));
   border: 1px solid rgba(200, 142, 134, 0.14);
+}
+
+.spice-item::after {
+  content: "";
+  position: absolute;
+  inset: auto 16px 10px auto;
+  width: 34px;
+  height: 34px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.42), transparent 62%);
+  opacity: 0.7;
 }
 
 .spice-item strong {
