@@ -5,151 +5,156 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reviews by Royce</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
 <style>
 body {
-  margin:0;
-  font-family:'Poppins', sans-serif;
-  background:#f4f8f4;
-  color:#2f3e2f;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #f2f6f3;
+  color: #2f3e34;
 }
 
 header {
-  font-family:'Playfair Display', serif;
-  text-align:center;
-  padding:35px 20px;
-  font-size:2.4rem;
-  background:linear-gradient(to right,#dce8df,#eef5f0);
-}
-
-.subtitle {
-  font-size:1rem;
-  margin-top:8px;
-  color:#6c8a6f;
+  background: #6f8f76;
+  color: white;
+  padding: 25px;
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  letter-spacing: 1px;
 }
 
 nav {
-  display:flex;
-  justify-content:center;
-  gap:15px;
-  padding:15px;
+  display: flex;
+  justify-content: center;
+  background: #4f6f57;
 }
 
 nav button {
-  background:white;
-  border:none;
-  padding:10px 22px;
-  border-radius:25px;
-  cursor:pointer;
-  color:#4f6f52;
-  box-shadow:0 4px 10px rgba(0,0,0,0.06);
+  background: none;
+  border: none;
+  color: white;
+  padding: 15px 20px;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
-.page {display:none; max-width:1000px; margin:auto; padding:20px;}
-.active {display:block;}
+nav button:hover {
+  background: #6f8f76;
+}
+
+.page {
+  display: none;
+  padding: 30px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.active {
+  display: block;
+}
 
 .section-card {
-  background:white;
-  border-radius:18px;
-  padding:20px;
-  margin-bottom:25px;
-  box-shadow:0 6px 18px rgba(0,0,0,0.06);
-  border:1px solid #e3efe3;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .current-reading {
-  display:flex;
-  gap:20px;
-  align-items:center;
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
 .current-reading img {
-  width:120px;
-  border-radius:10px;
+  max-width: 120px;
+  border-radius: 8px;
 }
 
 .search-bar {
-  width:100%;
-  padding:12px;
-  border-radius:25px;
-  border:none;
-  box-shadow:0 4px 10px rgba(0,0,0,0.05);
-  margin-bottom:20px;
-}
-
-#bookList {
-  column-count:3;
-  column-gap:20px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccd9d0;
+  margin-bottom: 20px;
 }
 
 .book-card {
-  break-inside:avoid;
-  background:white;
-  border-radius:18px;
-  margin-bottom:20px;
-  box-shadow:0 8px 20px rgba(0,0,0,0.06);
-  overflow:hidden;
-  border:1px solid #e3efe3;
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
-.book-card img {width:100%;}
+.book-card img {
+  max-width: 140px;
+  border-radius: 8px;
+}
 
-.card-content {padding:15px;}
+.book-row {
+  display: flex;
+  gap: 20px;
+}
+
+.stars, .spice {
+  font-size: 1.2rem;
+}
 
 .goodreads {
-  display:inline-block;
-  margin-top:10px;
-  font-size:0.9rem;
-  text-decoration:none;
-  color:#6b8f71;
+  display: inline-block;
+  margin-top: 8px;
+  color: #4f6f57;
+  text-decoration: none;
 }
 
-@media(max-width:900px){#bookList{column-count:2;}}
-@media(max-width:600px){#bookList{column-count:1;}}
+.goodreads:hover {
+  text-decoration: underline;
+}
 </style>
 </head>
 
 <body>
 
-<header>
-  🌿 Reviews by Royce 🌿
-  <div class="subtitle">your next obsession starts here</div>
-</header>
+<header>Reviews by Royce</header>
 
 <nav>
-<button onclick="showPage('home')">Home</button>
-<button onclick="showPage('reviews')">Library</button>
-<button onclick="showPage('spice')">Spice Guide</button>
+  <button onclick="showPage('home')">Home</button>
+  <button onclick="showPage('reviews')">Reviews</button>
+  <button onclick="showPage('spice')">Spice Scale</button>
 </nav>
 
 <div id="home" class="page active">
 
-<div class="section-card">
-<h2>🌸 Currently Reading</h2>
-<div class="current-reading" id="currentReading"></div>
-</div>
+  <div class="section-card">
+    <h2>Currently Reading</h2>
+    <div class="current-reading" id="currentReading"></div>
+  </div>
 
-<div class="section-card">
-<h2>Welcome</h2>
-<p>romantasy, slow burns, emotional damage, and stories that stay with you ✨</p>
-</div>
+  <div class="section-card">
+    <h2>Welcome</h2>
+    <p>I’m an avid reader who loves romantasy, strong characters, and immersive worlds.</p>
+    <p>This is where I share my reviews, ratings, and current reads.</p>
+  </div>
 
 </div>
 
 <div id="reviews" class="page">
-<h2>Library</h2>
-<input class="search-bar" id="search" placeholder="search..." oninput="renderBooks()">
-<div id="bookList"></div>
+  <h2>Book Reviews</h2>
+  <input class="search-bar" id="search" placeholder="Search books..." oninput="renderBooks()">
+  <div id="bookList"></div>
 </div>
 
 <div id="spice" class="page">
-<h2>Spice Guide 🌶️</h2>
-<p>🌶️ soft</p>
-<p>🌶️🌶️ tension</p>
-<p>🌶️🌶️🌶️ open door</p>
-<p>🌶️🌶️🌶️🌶️ steamy</p>
-<p>🌶️🌶️🌶️🌶️🌶️ 🔥</p>
+  <h2>Spice Level Guide</h2>
+  <p>🌶️ = Minimal / Fade to black</p>
+  <p>🌶️🌶️ = Light romance</p>
+  <p>🌶️🌶️🌶️ = Moderate spice</p>
+  <p>🌶️🌶️🌶️🌶️ = Steamy</p>
+  <p>🌶️🌶️🌶️🌶️🌶️ = Very explicit</p>
 </div>
 
 <script>
@@ -157,28 +162,28 @@ const SHEET_URL = "PASTE_YOUR_API_LINK_HERE";
 
 let books = [];
 
-async function fetchBooks(){
+async function fetchBooks() {
   const res = await fetch(SHEET_URL);
   books = await res.json();
   renderBooks();
   renderCurrent();
 }
 
-function renderCurrent(){
+function renderCurrent() {
   const current = books.find(b => b.current === "yes");
-  if(!current) return;
+  if (!current) return;
 
   document.getElementById("currentReading").innerHTML = `
     <img src="${current.image}">
     <div>
       <h3>${current.title}</h3>
-      <p><b>${current.author}</b></p>
+      <p><strong>${current.author}</strong></p>
       <p>${current.summary}</p>
     </div>
   `;
 }
 
-function renderBooks(){
+function renderBooks() {
   const term = document.getElementById("search").value.toLowerCase();
   const list = document.getElementById("bookList");
   list.innerHTML = "";
@@ -190,23 +195,26 @@ function renderBooks(){
       card.className = "book-card";
 
       card.innerHTML = `
-        <img src="${book.image}">
-        <div class="card-content">
-          <h3>${book.title}</h3>
-          <p><b>${book.author}</b></p>
-          <p>${book.summary}</p>
-          <p>${"⭐".repeat(book.rating)}</p>
-          <p>${"🌶️".repeat(book.spice)}</p>
-          <a class="goodreads" href="${book.goodreads}" target="_blank">Goodreads →</a>
+        <div class="book-row">
+          <img src="${book.image}">
+          <div>
+            <h3>${book.title}</h3>
+            <p><strong>${book.author}</strong></p>
+            <p>${book.summary}</p>
+            <p class="stars">${"⭐".repeat(book.rating)}</p>
+            <p class="spice">${"🌶️".repeat(book.spice)}</p>
+            <a class="goodreads" href="${book.goodreads}" target="_blank">View on Goodreads</a>
+          </div>
         </div>
       `;
+
       list.appendChild(card);
     });
 }
 
-function showPage(page){
+function showPage(pageId) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(page).classList.add('active');
+  document.getElementById(pageId).classList.add('active');
 }
 
 fetchBooks();
