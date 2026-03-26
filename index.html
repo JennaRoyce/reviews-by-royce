@@ -224,6 +224,14 @@ main {
   margin: 0;
 }
 
+.rating-details {
+  display: grid;
+  gap: 4px;
+  margin-top: 6px;
+  color: #56705e;
+  font-size: 0.95rem;
+}
+
 .goodreads {
   display: inline-block;
   margin-top: 14px;
@@ -344,7 +352,7 @@ main {
     <div class="section-card">
       <h2>Spice Level Guide</h2>
       <div class="spice-grid">
-        <div class="spice-item"><strong>0</strong>No spice.</div>
+        <div class="spice-item"><strong>&nbsp;</strong>No spice.</div>
         <div class="spice-item"><strong>🌶️</strong>Minimal spice, fade-to-black scenes only.</div>
         <div class="spice-item"><strong>🌶️🌶️</strong>Includes at least one explicit scene, but there is mild utilization of spice.</div>
         <div class="spice-item"><strong>🌶️🌶️🌶️</strong>More frequent explicit scenes, but the book does not highly focus on these elements.</div>
@@ -359,6 +367,24 @@ main {
 const SHEET_URL = "PASTE_YOUR_API_LINK_HERE";
 
 let books = [];
+
+function getStarDisplay(rating) {
+  return "⭐".repeat(Number(rating) || 0);
+}
+
+function getSpiceDisplay(spice) {
+  return "🌶️".repeat(Number(spice) || 0);
+}
+
+function getSpiceLabel(spice) {
+  const level = Number(spice) || 0;
+  return level === 0 ? "No spice" : `${level}/5 chilis`;
+}
+
+function getRatingLabel(rating) {
+  const level = Number(rating) || 0;
+  return `${level}/5 stars`;
+}
 
 async function fetchBooks() {
   const res = await fetch(SHEET_URL);
@@ -389,8 +415,12 @@ function renderCurrent() {
           <p class="meta-line">${current.author}</p>
           <p>${current.summary}</p>
           <div class="rating-row">
-            <p class="stars">${"⭐".repeat(current.rating || 0)}</p>
-            <p class="spice">${"🌶️".repeat(current.spice || 0)}</p>
+            <p class="stars">${getStarDisplay(current.rating)}</p>
+            <p class="spice">${getSpiceDisplay(current.spice)}</p>
+          </div>
+          <div class="rating-details">
+            <p>Rating: ${getRatingLabel(current.rating)}</p>
+            <p>Spice: ${getSpiceLabel(current.spice)}</p>
           </div>
         </div>
       </div>
@@ -417,8 +447,12 @@ function renderBooks() {
             <p class="meta-line">${book.author}</p>
             <p>${book.summary}</p>
             <div class="rating-row">
-              <p class="stars">${"⭐".repeat(book.rating || 0)}</p>
-              <p class="spice">${"🌶️".repeat(book.spice || 0)}</p>
+              <p class="stars">${getStarDisplay(book.rating)}</p>
+              <p class="spice">${getSpiceDisplay(book.spice)}</p>
+            </div>
+            <div class="rating-details">
+              <p>Rating: ${getRatingLabel(book.rating)}</p>
+              <p>Spice: ${getSpiceLabel(book.spice)}</p>
             </div>
             <a class="goodreads" href="${book.goodreads}" target="_blank">View on Goodreads</a>
           </div>
