@@ -11,7 +11,7 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: #f2f6f3;
+  background: #f3f7f4;
   color: #2f3e34;
 }
 
@@ -22,26 +22,29 @@ header {
   text-align: center;
   font-family: 'Playfair Display', serif;
   font-size: 2rem;
-  letter-spacing: 1px;
 }
 
 nav {
   display: flex;
   justify-content: center;
-  background: #4f6f57;
+  gap: 10px;
+  padding: 15px;
+  background: #e4efe7;
 }
 
 nav button {
-  background: none;
+  background: white;
   border: none;
-  color: white;
-  padding: 15px 20px;
+  color: #4f6f57;
+  padding: 10px 18px;
+  border-radius: 25px;
   cursor: pointer;
-  font-size: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: 0.2s;
 }
 
 nav button:hover {
-  background: #6f8f76;
+  background: #d8e8dc;
 }
 
 .page {
@@ -57,51 +60,41 @@ nav button:hover {
 
 .section-card {
   background: white;
-  border-radius: 12px;
+  border-radius: 20px;
   padding: 20px;
   margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.current-reading {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.current-reading img {
-  max-width: 120px;
-  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 }
 
 .search-bar {
   width: 100%;
   padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccd9d0;
+  border-radius: 25px;
+  border: none;
   margin-bottom: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .book-card {
   background: white;
-  border-radius: 12px;
-  padding: 20px;
+  border-radius: 20px;
+  padding: 18px;
   margin-bottom: 20px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-}
-
-.book-card img {
-  max-width: 140px;
-  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06);
 }
 
 .book-row {
   display: flex;
-  gap: 20px;
+  gap: 18px;
+}
+
+.book-card img {
+  max-width: 120px;
+  border-radius: 12px;
 }
 
 .stars, .spice {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 .goodreads {
@@ -114,32 +107,37 @@ nav button:hover {
 .goodreads:hover {
   text-decoration: underline;
 }
+
+@media(max-width:700px){
+  .book-row{flex-direction:column;align-items:center;text-align:center;}
+}
 </style>
 </head>
 
 <body>
 
-<header>Reviews by Royce</header>
+<header>🌿 Reviews by Royce 🌿</header>
 
 <nav>
   <button onclick="showPage('home')">Home</button>
+  <button onclick="showPage('current')">Currently Reading</button>
   <button onclick="showPage('reviews')">Reviews</button>
   <button onclick="showPage('spice')">Spice Scale</button>
 </nav>
 
 <div id="home" class="page active">
-
-  <div class="section-card">
-    <h2>Currently Reading</h2>
-    <div class="current-reading" id="currentReading"></div>
-  </div>
-
   <div class="section-card">
     <h2>Welcome</h2>
     <p>I’m an avid reader who loves romantasy, strong characters, and immersive worlds.</p>
-    <p>This is where I share my reviews, ratings, and current reads.</p>
+    <p>This is where I track everything I’ve read, loved, and obsessed over.</p>
   </div>
+</div>
 
+<div id="current" class="page">
+  <div class="section-card">
+    <h2>Currently Reading</h2>
+    <div id="currentReading"></div>
+  </div>
 </div>
 
 <div id="reviews" class="page">
@@ -149,12 +147,14 @@ nav button:hover {
 </div>
 
 <div id="spice" class="page">
-  <h2>Spice Level Guide</h2>
-  <p>🌶️ = Minimal / Fade to black</p>
-  <p>🌶️🌶️ = Light romance</p>
-  <p>🌶️🌶️🌶️ = Moderate spice</p>
-  <p>🌶️🌶️🌶️🌶️ = Steamy</p>
-  <p>🌶️🌶️🌶️🌶️🌶️ = Very explicit</p>
+  <div class="section-card">
+    <h2>Spice Level Guide</h2>
+    <p>🌶️ = Minimal / Fade to black</p>
+    <p>🌶️🌶️ = Light romance</p>
+    <p>🌶️🌶️🌶️ = Moderate spice</p>
+    <p>🌶️🌶️🌶️🌶️ = Steamy</p>
+    <p>🌶️🌶️🌶️🌶️🌶️ = Very explicit</p>
+  </div>
 </div>
 
 <script>
@@ -174,11 +174,15 @@ function renderCurrent() {
   if (!current) return;
 
   document.getElementById("currentReading").innerHTML = `
-    <img src="${current.image}">
-    <div>
-      <h3>${current.title}</h3>
-      <p><strong>${current.author}</strong></p>
-      <p>${current.summary}</p>
+    <div class="book-card">
+      <div class="book-row">
+        <img src="${current.image}">
+        <div>
+          <h3>${current.title}</h3>
+          <p><strong>${current.author}</strong></p>
+          <p>${current.summary}</p>
+        </div>
+      </div>
     </div>
   `;
 }
