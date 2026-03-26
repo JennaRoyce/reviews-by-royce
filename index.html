@@ -197,6 +197,7 @@ main {
   border-radius: 28px;
   object-fit: cover;
   box-shadow: 0 14px 24px rgba(53, 84, 63, 0.16);
+  background: rgba(255, 252, 247, 0.85);
 }
 
 .book-card h3 {
@@ -335,7 +336,7 @@ main {
   <div id="current" class="page">
     <div class="section-card">
       <h2>Currently Reading</h2>
-      <p>The book in this tab is separate from the welcome page, so this section can feel like its own little reading journal corner.</p>
+      <p>Currently in the world of:</p>
       <div id="currentReading"></div>
     </div>
   </div>
@@ -386,6 +387,23 @@ function getRatingLabel(rating) {
   return `${level}/5 stars`;
 }
 
+function normalizeImageUrl(url) {
+  if (!url) return "";
+  const trimmed = String(url).trim();
+
+  const driveMatch = trimmed.match(/\/d\/([^/]+)/);
+  if (driveMatch) {
+    return `https://drive.google.com/uc?export=view&id=${driveMatch[1]}`;
+  }
+
+  const driveIdMatch = trimmed.match(/[?&]id=([^&]+)/);
+  if (trimmed.includes("drive.google.com") && driveIdMatch) {
+    return `https://drive.google.com/uc?export=view&id=${driveIdMatch[1]}`;
+  }
+
+  return trimmed;
+}
+
 async function fetchBooks() {
   const res = await fetch(SHEET_URL);
   books = await res.json();
@@ -409,7 +427,7 @@ function renderCurrent() {
   currentContainer.innerHTML = `
     <div class="book-card">
       <div class="book-row">
-        <img src="${current.image}" alt="${current.title} cover">
+        <img src="${normalizeImageUrl(current.image)}" alt="${current.title} cover" onerror="this.style.display='none'">
         <div>
           <h3>${current.title}</h3>
           <p class="meta-line">${current.author}</p>
@@ -441,7 +459,7 @@ function renderBooks() {
 
       card.innerHTML = `
         <div class="book-row">
-          <img src="${book.image}" alt="${book.title} cover">
+          <img src="${normalizeImageUrl(book.image)}" alt="${book.title} cover" onerror="this.style.display='none'">
           <div>
             <h3>${book.title}</h3>
             <p class="meta-line">${book.author}</p>
