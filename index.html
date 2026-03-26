@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reviews by Royce</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Cormorant+Garamond:wght@400;500&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin:0;
+  font-family:'Poppins', sans-serif;
+  background:#f4f8f4;
+  color:#2f3e2f;
+}
+
+header {
+  font-family:'Playfair Display', serif;
+  text-align:center;
+  padding:35px 20px;
+  font-size:2.6rem;
+  background:linear-gradient(to right,#dcefe0,#edf7ee);
+  letter-spacing:1px;
+}
+
+.subtitle {
+  font-family:'Cormorant Garamond', serif;
+  font-size:1.1rem;
+  margin-top:8px;
+  color:#5f7a60;
+}
+
+nav {
+  display:flex;
+  justify-content:center;
+  gap:15px;
+  padding:15px;
+}
+
+nav button {
+  background:#ffffff;
+  border:none;
+  padding:10px 22px;
+  border-radius:25px;
+  cursor:pointer;
+  color:#4f6f52;
+  box-shadow:0 4px 10px rgba(0,0,0,0.05);
+  transition:.3s;
+}
+
+nav button:hover {
+  transform:translateY(-2px);
+  background:#eef6ee;
+}
+
+.page {
+  display:none;
+  max-width:1000px;
+  margin:auto;
+  padding:20px;
+}
+
+.active {display:block;}
+
+.search-bar {
+  width:100%;
+  padding:12px;
+  border-radius:25px;
+  border:none;
+  box-shadow:0 4px 10px rgba(0,0,0,0.05);
+  margin-bottom:20px;
+}
+
+#bookList {
+  column-count:3;
+  column-gap:20px;
+}
+
+.book-card {
+  break-inside:avoid;
+  background:#f7fbf7;
+  border-radius:18px;
+  margin-bottom:20px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.06);
+  overflow:hidden;
+  border:1px solid #e3efe3;
+  transition:.3s;
+}
+
+.book-card:hover {
+  transform:scale(1.02);
+}
+
+.book-card img {
+  width:100%;
+}
+
+.card-content {
+  padding:15px;
+}
+
+h2 {
+  font-family:'Playfair Display', serif;
+}
+
+h3 {
+  margin:5px 0;
+  font-family:'Cormorant Garamond', serif;
+}
+
+.rating {
+  margin-top:8px;
+  font-size:0.95rem;
+}
+
+.spice {
+  margin-top:4px;
+}
+
+.goodreads {
+  display:inline-block;
+  margin-top:10px;
+  font-size:0.9rem;
+  text-decoration:none;
+  color:#6b8f71;
+}
+
+.goodreads:hover {text-decoration:underline;}
+
+@media(max-width:900px){#bookList{column-count:2;}}
+@media(max-width:600px){#bookList{column-count:1;}}
+</style>
+</head>
+
+<body>
+
+<header>
+  🌿 Reviews by Royce 🌿
+  <div class="subtitle">a cozy collection of stories, magic, and soft obsessions</div>
+</header>
+
+<nav>
+<button onclick="showPage('home')">Home</button>
+<button onclick="showPage('reviews')">Library</button>
+<button onclick="showPage('spice')">Spice Guide</button>
+</nav>
+
+<div id="home" class="page active">
+<h2>🌸 Welcome 🌸</h2>
+<p>Welcome to my little greenhouse of books — where stories bloom and feelings linger.</p>
+<p>I read romantasy, soft slow burns, and character-driven worlds filled with emotion, magic, and connection.</p>
+<p>This is where I keep track of everything I’ve loved, rated, and completely obsessed over ✨</p>
+</div>
+
+<div id="reviews" class="page">
+<h2>🌿 My Library 🌿</h2>
+<input class="search-bar" id="search" placeholder="search for a story..." oninput="renderBooks()">
+<div id="bookList"></div>
+</div>
+
+<div id="spice" class="page">
+<h2>🌶️ Spice Guide 🌶️</h2>
+<p>🌶️ gentle / fade to black</p>
+<p>🌶️🌶️ soft tension</p>
+<p>🌶️🌶️🌶️ open door romance</p>
+<p>🌶️🌶️🌶️🌶️ steamy moments</p>
+<p>🌶️🌶️🌶️🌶️🌶️ very spicy 🔥</p>
+</div>
+
+<script>
+const SHEET_URL = "PASTE_YOUR_GOOGLE_SHEET_API_URL_HERE";
+
+function showPage(page){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.getElementById(page).classList.add('active');
+}
+
+let allBooks = [];
+
+async function fetchBooks(){
+ try{
+   const res = await fetch(SHEET_URL);
+   const data = await res.json();
+   allBooks = data;
+   renderBooks();
+ } catch(e){
+   console.error("Error loading books", e);
+ }
+}
+
+function renderBooks(){
+ const term = document.getElementById('search').value.toLowerCase();
+ const list = document.getElementById('bookList');
+ list.innerHTML='';
+
+ allBooks
+   .filter(b => b.title.toLowerCase().includes(term))
+   .forEach(book => {
+     const card=document.createElement('div');
+     card.className='book-card';
+
+     card.innerHTML=`
+       <img src="${book.image}">
+       <div class="card-content">
+         <h3>${book.title}</h3>
+         <p><b>${book.author}</b></p>
+         <p>${book.summary}</p>
+         <p class="rating">rating: ${'⭐'.repeat(book.rating)}</p>
+         <p class="spice">${'🌶️'.repeat(book.spice)}</p>
+         <a class="goodreads" href="${book.goodreads}" target="_blank">view on goodreads →</a>
+       </div>
+     `;
+
+     list.appendChild(card);
+   });
+}
+
+fetchBooks();
+setInterval(fetchBooks, 10000);
+</script>
+
+</body>
+</html>
