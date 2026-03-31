@@ -389,10 +389,10 @@ main {
 }
 
 .review-section h4 {
-  margin: 0 0 6px;
-  font-size: 0.82rem;
+  margin: 0 0 8px;
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--text-soft);
 }
@@ -726,6 +726,10 @@ function renderFullBookContent(book) {
         <div>
           <h3>${book.title}</h3>
           <p class="meta-line">${book.author}</p>
+          <div class="rating-row">
+            ${renderMetricBlock("rating", book.rating)}
+            ${renderMetricBlock("spice", book.spice)}
+          </div>
           <div class="review-section">
             <h4>Summary</h4>
             <button class="spoiler-toggle" onclick="toggleSpoiler('${summaryId}', this)">Unhide (contains spoilers)</button>
@@ -736,10 +740,6 @@ function renderFullBookContent(book) {
           <div class="review-section">
             <h4>Review</h4>
             <p>${book.review || "No written review added yet."}</p>
-          </div>
-          <div class="rating-row">
-            ${renderMetricBlock("rating", book.rating)}
-            ${renderMetricBlock("spice", book.spice)}
           </div>
           <a class="goodreads" href="${book.goodreads}" target="_blank">View on Goodreads</a>
         </div>
