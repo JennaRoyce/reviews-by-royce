@@ -808,8 +808,9 @@ function renderBooks() {
   const list = document.getElementById("bookList");
   list.innerHTML = "";
 
-  books
-    .map((book, index) => ({ book, index }))
+  [...books]
+    .sort((a, b) => a.title.localeCompare(b.title))
+    .map(book => ({ book, index: books.indexOf(book) }))
     .filter(({ book }) => book.title.toLowerCase().includes(term))
     .forEach(({ book, index }) => {
       const card = document.createElement("div");
