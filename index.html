@@ -709,9 +709,17 @@ function getSeriesLabel(book) {
   return number ? `${book.series} • Book ${number}` : `${book.series}`;
 }
 
+function getAuthorSortName(author) {
+  const trimmed = String(author || "").trim();
+  if (!trimmed) return "";
+  const parts = trimmed.split(/\s+/);
+  const lastName = parts[parts.length - 1];
+  return `${lastName} ${trimmed}`.toLowerCase();
+}
+
 function sortBooksForReviews(items) {
   return [...items].sort((a, b) => {
-    const authorCompare = String(a.author || "").localeCompare(String(b.author || ""));
+    const authorCompare = getAuthorSortName(a.author).localeCompare(getAuthorSortName(b.author));
     if (authorCompare !== 0) return authorCompare;
 
     const aHasSeries = hasMetricValue(a.series);
