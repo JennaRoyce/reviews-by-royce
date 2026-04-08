@@ -355,6 +355,13 @@ main {
   margin-bottom: 14px;
 }
 
+.series-line {
+  margin: -8px 0 14px;
+  color: #a06f83;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
 .rating-row {
   display: flex;
   flex-wrap: wrap;
@@ -690,6 +697,44 @@ function hasMetricValue(value) {
   return value !== undefined && value !== null && String(value).trim() !== "";
 }
 
+function getSeriesNumber(value) {
+  if (!hasMetricValue(value)) return null;
+  const number = Number(value);
+  return Number.isFinite(number) ? number : null;
+}
+
+function getSeriesLabel(book) {
+  if (!hasMetricValue(book.series)) return "";
+  const number = getSeriesNumber(book.series_number);
+  return number ? `${book.series} • Book ${number}` : `${book.series}`;
+}
+
+function sortBooksForReviews(items) {
+  return [...items].sort((a, b) => {
+    const authorCompare = String(a.author || "").localeCompare(String(b.author || ""));
+    if (authorCompare !== 0) return authorCompare;
+
+    const aHasSeries = hasMetricValue(a.series);
+    const bHasSeries = hasMetricValue(b.series);
+    if (aHasSeries && bHasSeries) {
+      const seriesCompare = String(a.series).localeCompare(String(b.series));
+      if (seriesCompare !== 0) return seriesCompare;
+
+      const aSeriesNumber = getSeriesNumber(a.series_number);
+      const bSeriesNumber = getSeriesNumber(b.series_number);
+      if (aSeriesNumber !== null && bSeriesNumber !== null && aSeriesNumber !== bSeriesNumber) {
+        return aSeriesNumber - bSeriesNumber;
+      }
+      if (aSeriesNumber !== null && bSeriesNumber === null) return -1;
+      if (aSeriesNumber === null && bSeriesNumber !== null) return 1;
+    } else if (aHasSeries !== bHasSeries) {
+      return aHasSeries ? -1 : 1;
+    }
+
+    return String(a.title || "").localeCompare(String(b.title || ""));
+  });
+}
+
 function normalizeImageUrl(url) {
   if (!url) return "";
   const trimmed = String(url).trim();
@@ -731,6 +776,7 @@ function renderFullBookContent(book) {
         <div>
           <h3>${book.title}</h3>
           <p class="meta-line">${book.author}</p>
+          ${getSeriesLabel(book) ? `<p class="series-line">${getSeriesLabel(book)}</p>` : ""}
           <div class="rating-row">
             ${renderMetricBlock("rating", book.rating)}
             ${renderMetricBlock("spice", book.spice)}
@@ -797,6 +843,7 @@ function renderCurrent() {
         <div>
           <h3>${current.title}</h3>
           <p class="meta-line">${current.author}</p>
+          ${getSeriesLabel(current) ? `<p class="series-line">${getSeriesLabel(current)}</p>` : ""}
         </div>
       </div>
     </div>
@@ -808,8 +855,7 @@ function renderBooks() {
   const list = document.getElementById("bookList");
   list.innerHTML = "";
 
-  [...books]
-    .sort((a, b) => a.title.localeCompare(b.title))
+  sortBooksForReviews(books)
     .map(book => ({ book, index: books.indexOf(book) }))
     .filter(({ book }) => book.title.toLowerCase().includes(term))
     .forEach(({ book, index }) => {
@@ -822,6 +868,7 @@ function renderBooks() {
           <div>
             <button class="review-link" onclick="openBookModal(${index})">${book.title}</button>
             <p class="meta-line">${book.author}</p>
+            ${getSeriesLabel(book) ? `<p class="series-line">${getSeriesLabel(book)}</p>` : ""}
             <div class="rating-row">
               ${renderMetricBlock("rating", book.rating)}
               ${renderMetricBlock("spice", book.spice)}
