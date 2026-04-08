@@ -783,8 +783,8 @@ function renderFullBookContent(book) {
         <img src="${normalizeImageUrl(book.image)}" alt="${book.title} cover" onerror="this.style.display='none'">
         <div>
           <h3>${book.title}</h3>
-          <p class="meta-line">${book.author}</p>
           ${getSeriesLabel(book) ? `<p class="series-line">${getSeriesLabel(book)}</p>` : ""}
+          <p class="meta-line">${book.author}</p>
           <div class="rating-row">
             ${renderMetricBlock("rating", book.rating)}
             ${renderMetricBlock("spice", book.spice)}
@@ -850,8 +850,8 @@ function renderCurrent() {
         <img src="${normalizeImageUrl(current.image)}" alt="${current.title} cover" onerror="this.style.display='none'">
         <div>
           <h3>${current.title}</h3>
-          <p class="meta-line">${current.author}</p>
           ${getSeriesLabel(current) ? `<p class="series-line">${getSeriesLabel(current)}</p>` : ""}
+          <p class="meta-line">${current.author}</p>
         </div>
       </div>
     </div>
@@ -875,8 +875,8 @@ function renderBooks() {
           <img src="${normalizeImageUrl(book.image)}" alt="${book.title} cover" onerror="this.style.display='none'">
           <div>
             <button class="review-link" onclick="openBookModal(${index})">${book.title}</button>
-            <p class="meta-line">${book.author}</p>
             ${getSeriesLabel(book) ? `<p class="series-line">${getSeriesLabel(book)}</p>` : ""}
+            <p class="meta-line">${book.author}</p>
             <div class="rating-row">
               ${renderMetricBlock("rating", book.rating)}
               ${renderMetricBlock("spice", book.spice)}
